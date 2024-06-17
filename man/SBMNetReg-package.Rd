@@ -4,7 +4,7 @@
 \name{SBMNetReg-package}
 \alias{SBMNetReg}
 \alias{SBMNetReg-package}
-\title{SBMNetReg: What the Package Does (Title Case)}
+\title{SBMNetReg: Compute Regression Estimates Using Stochastic Blockmodels For Partial Network Data}
 \description{
 More about what it does (maybe more than one line) Use four spaces when indenting paragraphs within the Description.
 }
