@@ -69,4 +69,49 @@ ContagionOptimalSeeding <- function(SBM,n_seeds = 2, num_sim = 2000, contagion_t
 }
 
 
+ContagionOptimalSeedingFullGraph <- function(G,n_seeds = 2, num_sim = 2000, contagion_type = 'simple', complex_mean = NULL, complex_sd = NULL, ...){
+
+  n = length(SBM$G) # number of nodes
+
+  grid <- expand.grid(rep(list(1:n), n_seeds))
+  n_clusters = as.numeric(table(SBM$Z))
+
+  n_comb = nrow(grid)
+  avg_vec = c()
+  sd_vec = c()
+  comb_list = c()
+
+  results_row = 1
+  for(i in seq(n_comb)){
+    cat(paste('Seed Combination', i, '/', n_comb), end = '\r') # print progress
+    cluster_seeds = as.numeric(grid[i,])
+
+    # treatment seeds
+    A = rep(0,n)
+    A[cluster_seeds] = 1
+    for(sim in seq(num_sim)){
+      if(contagion_type == 'simple'){
+        adopted = simSimpleContagion(A, G, ...)
+      } else if(contagion_type == 'complex'){
+        thresholds = BeamanAdoptionThreshold(n, mean = complex_mean, sd = complex_sd)
+        adopted = simComplexContagion(A, G, thresholds, ...)
+      }
+
+      total_adopted[sim] = sum(adopted)
+
+    }
+    avg_adopted = mean(total_adopted)
+    se_adopted = sd(total_adopted) / sqrt(length(total_adopted))
+
+    avg_vec[results_row] = avg_adopted
+    sd_vec[results_row] = se_adopted
+    comb_list[results_row] = paste(cluster_seeds, collapse = ", ")
+
+    results_row = results_row + 1
+  }
+  results = data.frame('avg_adopted' = avg_vec, 'se_adopted' = sd_vec, 'cluster_seeds' = comb_list, 'rank' = rank(-avg_vec))
+  return(results)
+}
+
+
 

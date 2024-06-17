@@ -1,9 +1,9 @@
 Package: SBMNetReg
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Compute Regression Estimates Using Stochastic Blockmodels For Partial Network Data
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
+Author: Steven Wilkins-Reeves
+Maintainer: Steven Wilkins-Reeves <stevewr@uw.edu>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: MIT + file LICENSE

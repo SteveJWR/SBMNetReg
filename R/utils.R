@@ -90,7 +90,6 @@ labelSwitchingPermutations <- function(Z.ref,Z.hat){
 }
 
 
-
 #' Simulate Draw of an SBM
 #'
 #' @param n number of nodes to simulate
